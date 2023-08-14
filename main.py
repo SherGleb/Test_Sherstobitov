@@ -103,21 +103,12 @@ class FoodSoulOrder:
 
     @staticmethod
     def checkout(driver):
-        try:
-            cart = driver.find_element(By.CSS_SELECTOR,
-                                       '#app > div.pe-none.cart-button.container > div > div > div.popover__content > '
-                                       'div')
-            checkout = driver.find_element(By.CSS_SELECTOR,
-                                           '#app > div.pe-none.cart-button.container > div > div > '
-                                           'div.popover__content > div > button')
-            checkout.click()
-        except:
-            go_to_cart = driver.find_element(By.CSS_SELECTOR, '#app > div.pe-none.cart-button.container > div')
-            go_to_cart.click()
-            checkout = driver.find_element(By.CSS_SELECTOR,
-                                           '#app > div.pe-none.cart-button.container > div > div > '
-                                           'div.popover__content > div > button')
-            checkout.click()
+        go_to_cart = driver.find_element(By.CSS_SELECTOR, '#app > div.pe-none.cart-button.container > div')
+        go_to_cart.click()
+        checkout = driver.find_element(By.CSS_SELECTOR,
+                                       '#app > div.pe-none.cart-button.container > div > div > '
+                                       'div.popover__content > div > button')
+        checkout.click()
 
     def number_box(self, driver):
         number_box = driver.find_element(By.CSS_SELECTOR,
@@ -164,9 +155,9 @@ class FoodSoulOrder:
             self.authorization(driver)
             # Ввод кода и его проверка с помощью метода класса.
             self.enter_code(driver)
+            time.sleep(5)
             # Нажатие на кнопку оформления заказа.
             self.checkout(driver)
-            time.sleep(5)
 
             # Выбор способа оплаты
             payment = driver.find_element(By.XPATH, '//*[@id="app"]/main/div[2]/form/div/div/div[1]/div[2]/ul/li['
