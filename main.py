@@ -103,12 +103,13 @@ class FoodSoulOrder:
 
     @staticmethod
     def checkout(driver):
-        go_to_cart = driver.find_element(By.CSS_SELECTOR, '#app > div.pe-none.cart-button.container > div')
-        go_to_cart.click()
-        checkout = driver.find_element(By.CSS_SELECTOR,
-                                       '#app > div.pe-none.cart-button.container > div > div > '
-                                       'div.popover__content > div > button')
-        checkout.click()
+        # go_to_cart = driver.find_element(By.CSS_SELECTOR, '#app > div.pe-none.cart-button.container > div > div > div '
+        #                                                   '> button')
+        # driver.execute_script("arguments[0].click();", go_to_cart)
+        # go_to_cart.click()
+        checkout = driver.find_element(By.CSS_SELECTOR, '#app > div.pe-none.cart-button.container > div > div > div.popover__content > div > button')
+        # checkout.click()
+        driver.execute_script("arguments[0].click();", checkout)
 
     def number_box(self, driver):
         number_box = driver.find_element(By.CSS_SELECTOR,
@@ -158,32 +159,25 @@ class FoodSoulOrder:
             time.sleep(5)
             # Нажатие на кнопку оформления заказа.
             self.checkout(driver)
-
             # Выбор способа оплаты
-            payment = driver.find_element(By.XPATH, '//*[@id="app"]/main/div[2]/form/div/div/div[1]/div[2]/ul/li['
-                                                    '4]/div/div[1]/button')
-
-            driver.execute_script("arguments[0].scrollIntoView();", payment)
-            payment.click()
-            # action = webdriver.common.action_chains.ActionChains(driver)
-            # action.move_to_element_with_offset(payment, 5, 5)
-            # action.click()
-            # action.perform()
-
+            payment = driver.find_element(By.XPATH, '//*[@id="app"]/main/div[2]/form/div/div/div[1]/div['
+                                                    '2]/ul/li[4]/div/div[1]/button')
+            # driver.execute_script("arguments[0].scrollIntoView();", payment)
+            # payment.click()
+            # Оплата картой при получении.
             pay_by_card = driver.find_element(By.XPATH, '//*[@id="app"]/main/div[2]/form/div/div/div[1]/div[2]/ul/li['
                                                         '4]/div/div[2]/div/div[1]/div[2]/div/div/div/ul/li[2]')
-            # driver.execute_script("arguments[0].scrollIntoView();", pay_by_card)
-            action2 = webdriver.common.action_chains.ActionChains(driver)
-            action2.move_to_element_with_offset(pay_by_card, 5, 5)
-            action2.click()
-            action2.perform()
+
+            driver.execute_script("arguments[0].scrollIntoView();", pay_by_card)
+            driver.execute_script("arguments[0].click();", pay_by_card)
             # pay_by_card.click()
 
             # Размещение заказа
             place_an_order = driver.find_element(By.CSS_SELECTOR,
                                                  '#app > main > div.main-slot > form > div > div > div:nth-child(1) > '
                                                  'button > div')
-            place_an_order.click()
+            driver.execute_script("arguments[0].click();", place_an_order)
+            # place_an_order.click()
             time.sleep(5)
         except Exception as ex:
             print(ex)
