@@ -103,12 +103,7 @@ class FoodSoulOrder:
 
     @staticmethod
     def checkout(driver):
-        # go_to_cart = driver.find_element(By.CSS_SELECTOR, '#app > div.pe-none.cart-button.container > div > div > div '
-        #                                                   '> button')
-        # driver.execute_script("arguments[0].click();", go_to_cart)
-        # go_to_cart.click()
         checkout = driver.find_element(By.CSS_SELECTOR, '#app > div.pe-none.cart-button.container > div > div > div.popover__content > div > button')
-        # checkout.click()
         driver.execute_script("arguments[0].click();", checkout)
 
     @staticmethod
@@ -117,12 +112,10 @@ class FoodSoulOrder:
                                                 '2]/ul/li[4]/div/div[1]/button')
         driver.execute_script("arguments[0].scrollIntoView();", payment)
         driver.execute_script("arguments[0].click();", payment)
-        # payment.click()
         pay_by_card = driver.find_element(By.XPATH, '//*[@id="app"]/main/div[2]/form/div/div/div[1]/div[2]/ul/li['
                                                     '4]/div/div[2]/div/div[1]/div[2]/div/div/div/ul/li[2]')
 
         driver.execute_script("arguments[0].click();", pay_by_card)
-        # pay_by_card.click()
 
     @staticmethod
     def place_the_order(driver):
@@ -130,7 +123,6 @@ class FoodSoulOrder:
                                              '#app > main > div.main-slot > form > div > div > div:nth-child(1) > '
                                              'button > div')
         driver.execute_script("arguments[0].click();", place_an_order)
-        # place_an_order.click()
 
     def number_box(self, driver):
         number_box = driver.find_element(By.CSS_SELECTOR,
@@ -184,7 +176,6 @@ class FoodSoulOrder:
             self.payment_method(driver)
             # Размещение заказа
             self.place_the_order(driver)
-            time.sleep(5)
         except Exception as ex:
             print(ex)
         finally:
