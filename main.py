@@ -9,36 +9,6 @@ from art import tprint
 from selenium.webdriver.support.ui import Select
 
 
-class Driver:
-    service = Service(executable_path='chromedriver_win32/chromedriver.exe')
-    service = Service()
-    options = Options()
-    options.add_argument("--window-size=500,650")
-
-    def __init__(self):
-        self.driver = webdriver.Chrome(options=Driver.options, service=Driver.service)
-
-    def get_url(self, url):
-        self.driver.get(url)
-
-    def template_check(self):
-        pattern = r'template="[a-z]*"'
-        time.sleep(2)
-        html = self.driver.page_source
-        template = re.search(pattern, html)
-        return template[0][10:-1]
-
-    def find_element(self, by_obj, path):
-        return self.driver.find_element(by_obj, path)
-
-    def implicitly_wait(self, sec):
-        self.driver.implicitly_wait(sec)
-
-    def exit(self):
-        self.driver.close()
-        self.driver.quit()
-
-
 class User:
     templates = {
         'phone_number': r'\d{10}',
@@ -74,6 +44,35 @@ class User:
 
     def set_code(self):
         self.code = self.number_and_code_validation('code')
+
+
+class Driver:
+    service = Service(executable_path='chromedriver_win32/chromedriver.exe')
+    options = Options()
+    options.add_argument("--window-size=500,650")
+
+    def __init__(self):
+        self.driver = webdriver.Chrome(options=Driver.options, service=Driver.service)
+
+    def get_url(self, url):
+        self.driver.get(url)
+
+    def template_check(self):
+        pattern = r'template="[a-z]*"'
+        time.sleep(2)
+        html = self.driver.page_source
+        template = re.search(pattern, html)
+        return template[0][10:-1]
+
+    def find_element(self, by_obj, path):
+        return self.driver.find_element(by_obj, path)
+
+    def implicitly_wait(self, sec):
+        self.driver.implicitly_wait(sec)
+
+    def exit(self):
+        self.driver.close()
+        self.driver.quit()
 
 
 class DeliveryPage:
