@@ -47,7 +47,8 @@ class User:
 
 
 class Driver:
-    service = Service(executable_path='chromedriver_win32/chromedriver.exe')
+    # service = Service(executable_path='chromedriver_win32/chromedriver.exe')
+    service = Service()
     options = Options()
     options.add_argument("--window-size=500,650")
 
@@ -253,7 +254,7 @@ if __name__ == '__main__':
     tprint('FoodSoul')
     usr = User()
     driver = Driver()
-    # driver.maximize_window()
+    # driver.driver.maximize_window()
     driver.implicitly_wait(20)
     try:
         driver.get_url("https://shop.foodsoul.pro/")
